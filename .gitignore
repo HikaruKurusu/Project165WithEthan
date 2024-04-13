@@ -1,3 +1,9 @@
 /dependencies/
 /app.dSYM/
 /.vscode/
+makefile
+output
+glad.c:Zone.Identifier
+libglad.a
+makefile.txt:shield
+makefile.txt:Zone.Identifier
