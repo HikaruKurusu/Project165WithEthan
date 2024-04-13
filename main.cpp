@@ -2,7 +2,7 @@
 #include "dependencies/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-//bluh
+//blu
 
 int main()
 {
