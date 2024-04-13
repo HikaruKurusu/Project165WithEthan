@@ -1,6 +1,6 @@
-#include<iostream>
-#include<glad/glad.h>
-#include<GLFW/glfw3.h>
+#include"iostream"
+#include"glad/glad.h"
+#include"GLFW/glfw3.h"
 //no
 int main()
 {
@@ -19,8 +19,8 @@ int main()
 
 
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
-	GLFWwindow* window = glfwCreateWindow(800, 500, "GAME", NULL, NULL);
+	// Create a GLFWwindow object of 800 by 800 pixels, naming it "game"
+	GLFWwindow* window = glfwCreateWindow(1920, 1080, "GAME", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -42,7 +42,7 @@ int main()
 
 
 	// Specify the color of the background
-	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	// Clean the back buffer and assign the new color to it
 	glClear(GL_COLOR_BUFFER_BIT);
 	// Swap the back buffer with the front buffer
