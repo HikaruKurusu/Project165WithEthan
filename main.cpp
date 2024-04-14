@@ -1,9 +1,6 @@
 #include <iostream>
 #include "dependencies/include/glad/glad.h"
 #include <GLFW/glfw3.h>
-
-//blu
-
 int main()
 {
 	// Initialize GLFW
@@ -23,6 +20,7 @@ int main()
 
 	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
 	GLFWwindow* window = glfwCreateWindow(1920, 1080, "GAME", NULL, NULL);
+	
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -32,7 +30,7 @@ int main()
 	}
 	// Introduce the window into the current context
 	glfwMakeContextCurrent(window);
-
+	
 
 
 	//Load GLAD so it configures OpenGL
