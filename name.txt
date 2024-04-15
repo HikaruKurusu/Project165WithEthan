@@ -1,0 +1,328 @@
+#include <iostream>
+#include "dependencies/include/glad/glad.h"
+#include <GLFW/glfw3.h>
+int main()
+{
+	// Initialize GLFW
+	glfwInit();
+
+
+
+	// Tell GLFW what version of OpenGL we are using 
+	// In this case we are using OpenGL 3.3
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	// Tell GLFW we are using the CORE profile
+	// So that means we only have the modern functions
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
+
+	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	GLFWwindow* window = glfwCreateWindow(1920, 1080, "GAME", NULL, NULL);
+	
+	// Error check if the window fails to create
+	if (window == NULL)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+	// Introduce the window into the current context
+	glfwMakeContextCurrent(window);
+	
+
+
+	//Load GLAD so it configures OpenGL
+	gladLoadGL();
+	// Specify the viewport of OpenGL in the Window
+	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
+	glViewport(0, 0, 800, 800);
+
+
+
+	// Specify the color of the background
+	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+	// Clean the back buffer and assign the new color to it
+	glClear(GL_COLOR_BUFFER_BIT);
+	// Swap the back buffer with the front buffer
+	glfwSwapBuffers(window);
+
+
+
+	// Main while loop
+	while (!glfwWindowShouldClose(window))
+	{
+		// Take care of all GLFW events
+		glfwPollEvents();
+	}
+
+
+
+	// Delete window before ending the program
+	glfwDestroyWindow(window);
+	// Terminate GLFW before ending the program
+	glfwTerminate();
+	return 0;
+}
+
+
+// int w = 800, h = 600;
+// GLuint shaderProgram;
+// //initialize GLFW
+// void initGLFW(unsigned int versionMajor,unsigned int versionMinor) {
+// 	glfwInit();
+// 	//pass in windows params
+// 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
+// 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
+// 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+// #ifdef __APPLE__
+// 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+// #endif
+// }
+// void createWindow(GLFWwindow*& window, const char* title,unsigned int w,unsigned int h, GLFWframebuffersizefun framebufferSizeCallback){
+// 	window = glfwCreateWindow(w, h, title, NULL, NULL);
+// 	if(!window){
+// 		return;
+// 	}
+//     glfwMakeContextCurrent(window);
+//     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+// }
+
+
+
+// //loads glad which links all open gl function
+// bool loadGlad(){
+// 	return gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+// }
+
+
+// string readFile(const char* filename) {
+// 	ifstream file;
+// 	stringstream buf;
+// 	string ret = "";
+// 	file.open(filename);
+// 	if(file.is_open()) {
+// 		//read buffer
+// 		buf << file.rdbuf();
+//         ret = buf.str();
+// 	} else {
+// 		cout << "File not found" << filename << endl;
+// 	}
+// 	//close the file	
+// 	file.close();
+//     return ret;
+// }
+
+// int generateShader(const char* filepath, GLenum type) {
+// 	string shaderSource = readFile(filepath);
+// 	const GLchar* shader = shaderSource.c_str();
+// 	//build and compile the shader
+// 	int shaderObj = glCreateShader(type);
+// 	glShaderSource(shaderObj, 1, &shader, NULL);
+// 	glCompileShader(shaderObj);
+// 	//check for errors
+// 	int success;
+// 	char infoLog[512];
+// 	glGetShaderiv(shaderObj, GL_COMPILE_STATUS, &success);
+// 	if(!success) {
+// 		glGetShaderInfoLog(shaderObj, 512, NULL, infoLog);
+// 		cout << "Error compiling shader: " << infoLog << endl;
+// 		return -1;
+// 	}
+// 	return shaderObj;
+// }
+
+// int genShaderProgram(const char* shaderpath, const char* fragme){
+// 	int shaderProgram = glCreateProgram();
+// 	int vertexShader = generateShader(shaderpath, GL_VERTEX_SHADER);
+// 	int fragmentShader = generateShader(fragme, GL_FRAGMENT_SHADER);
+// 	if(vertexShader == -1 || fragmentShader == -1){
+// 		return -1;
+// 	}
+// 	glAttachShader(shaderProgram, vertexShader);
+// 	glAttachShader(shaderProgram, fragmentShader);
+// 	glLinkProgram(shaderProgram);
+
+// 	int success;
+// 	char infoLog[512];
+// 	glGetShaderiv(shaderProgram, GL_LINK_STATUS, &success);
+// 	if(!success) {
+// 		glGetShaderInfoLog(shaderProgram, 512, NULL, infoLog);
+// 		cout << "Error compiling linking: " << infoLog << endl;
+// 		return -1;
+// 	}
+// 	glDeleteShader(vertexShader);
+// 	glDeleteShader(fragmentShader);
+//     return shaderProgram;
+// }
+
+// void bindShader(int shaderProgram){
+// 	glUseProgram(shaderProgram);
+// }
+
+// void projection(int shaderProgram,float left, float right,float bottom, float top, float near, float far){
+// 	// create initial matrix to scale and translate basically where the ball projects towards
+// 	float matrix[4][4] = {{2/(right-left),0,0,0},{0,2/(top-bottom),0,0},{0,0,-2/(far-near),0},{-(right+left)/(right-left),-(top+bottom)/(top-bottom),-(far+near)/(far-near),1}};
+// 	bindShader(shaderProgram);
+// 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, &matrix[0][0]);
+// }
+
+// void deleteShader(int shaderProgram){
+// 	glDeleteProgram(shaderProgram);
+// }
+
+// struct VAO{
+// 	GLuint val;
+// 	GLuint posVBO;
+// 	GLuint offsetVBO;
+// 	GLuint sizeVBO;
+// 	GLuint EBO;
+// };
+// void genVAO(VAO* vao){
+// 	glGenVertexArrays(1, &vao->val);
+//     glBindVertexArray(vao->val);
+// }
+
+// template<typename T>
+// void genBufferObject(GLuint& bufferObject,GLenum type,GLuint numElements, T* data, GLenum usage){
+// 	glGenBuffers(1, &bufferObject);
+//     glBindBuffer(type, bufferObject);
+//     glBufferData(type, numElements * sizeof(T), data, usage);
+// }
+
+// template<typename T>
+// void updateData(GLuint& bufferObject, GLintptr offset,GLuint numElements,T* data){
+// 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
+// 	glBufferSubData(GL_ARRAY_BUFFER,offset,numElements*sizeof(T),data);
+// }
+// template<typename T>
+// void setAttpointer(GLuint& bufferObject, GLuint idx, GLuint size, GLenum type, GLuint stride, GLuint offset, GLuint devisor = 0){
+// 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
+//     glVertexAttribPointer(idx, size, type, GL_FALSE, stride * sizeof(T), (void*)(offset*sizeof(T)));
+//     // glEnableVertexArray(idx);
+// 	glEnableVertexAttribArray(idx);
+// 	if(devisor > 0){
+// 		glVertexAttribDivisor(idx, devisor);
+// 	}
+// }
+
+// void draw(VAO vao, GLenum mode, GLuint count, GLenum type, GLuint indice,GLuint instanceCount = 1){
+// 	glBindVertexArray(vao.val);
+//     // glDrawElementsInstanced(mode, count, type, (void*)indice, instanceCount);
+// 	glDrawElementsInstanced(mode, count, type, reinterpret_cast<void*>(static_cast<uintptr_t>(indice)), instanceCount);
+//     glBindVertexArray(0);
+// }
+
+// void unbindBuffer(GLenum type) {
+// 	glBindBuffer(type,0);
+// }
+
+// void unbindVAO() {
+// 	glBindVertexArray(0);
+// }
+
+// //cleanup deallocate
+// void cleanup(VAO vao){
+// 	glDeleteBuffers(1, &vao.posVBO);
+// 	glDeleteBuffers(1, &vao.offsetVBO);
+// 	glDeleteBuffers(1, &vao.sizeVBO);
+// 	glDeleteBuffers(1, &vao.EBO);
+// 	glDeleteVertexArrays(1, &vao.val);
+// }
+
+// //call back for window resizing
+// void framebufferSizeCallback(GLFWwindow* window,int width,int height) {
+// 	glViewport(0,0,w,h);
+// 	w = width;
+// 	h = height;
+// 	//update projection matrix
+// 	projection(shaderProgram,0,w,0,h,0,1);
+// }
+
+// void processInput(GLFWwindow* window){
+// 	if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+// 		glfwSetWindowShouldClose(window, true);
+// 	}
+// }
+
+// void clearScrn(){
+// 	glClearColor(0,0,0,1);
+// 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+// }
+
+// void newFrame(GLFWwindow* window){
+// 	glfwSwapBuffers(window);
+// 	glfwPollEvents();
+// }
+
+
+// int main() {
+// 	double dt = 0;
+// 	double lastFrame = 0;
+// 	//initialize
+// 	glfwInit();
+// 	//create window
+// 	GLFWwindow* window = nullptr;
+// 	createWindow(window,"Pong Game - Hikaru and Ethan",w,h,framebufferSizeCallback);
+// 	if (window == NULL) {
+// 		std::cout << "Failed to create GLFW window" << std::endl;
+// 		glfwTerminate();
+// 		return -1;
+// 	}
+
+// 	//load glad
+// 	if(!loadGlad()){
+// 		std::cout << "Failed to load Glad" << std::endl;
+// 		glfwTerminate();
+// 		return -1;
+// 	}
+// 	glViewport(0,0,w,h);
+
+// 	//shaders
+// 	shaderProgram = genShaderProgram("main.vs","main.fs");
+// 	projection(shaderProgram,0,w,0,h,0,1);
+// 	float arr[] = {0.5f,0.5f,-0.5f,0.5f,-0.5f,-0.5f,0.5f,-0.5f};//its coordinates x and y x is odd and y is even
+// 	unsigned int indecies[] = {0,1,2,2,3,0};
+// 	float offset[] = {200.0f,200.0f};
+// 	float size[] = {50.0f,50.0f};
+
+// 	//setup VAO/VBO
+// 	VAO vao;
+// 	genVAO(&vao);
+// 	genBufferObject<float>(vao.posVBO, GL_ARRAY_BUFFER, 8, arr, GL_STATIC_DRAW);
+// 	setAttpointer<float>(vao.posVBO,0,2,GL_FLOAT,2,0);
+
+// 	genBufferObject<float>(vao.offsetVBO, GL_ARRAY_BUFFER, 2, offset, GL_DYNAMIC_DRAW);
+// 	setAttpointer<float>(vao.offsetVBO,1,2,GL_FLOAT,2,0,1);
+
+// 	genBufferObject<float>(vao.sizeVBO, GL_ARRAY_BUFFER, 2, size, GL_DYNAMIC_DRAW);
+// 	setAttpointer<float>(vao.posVBO,2,2,GL_FLOAT,2,0,1);
+
+// 	genBufferObject<unsigned int>(vao.EBO, GL_ARRAY_BUFFER, 6, indecies, GL_DYNAMIC_DRAW);
+// 	setAttpointer<float>(vao.posVBO,2,2,GL_FLOAT,2,0,1);
+
+// 	unbindBuffer(GL_ARRAY_BUFFER);
+// 	unbindVAO();
+// 	//render loop
+// 	while(!glfwWindowShouldClose(window)){
+// 		//update time
+// 		dt = glfwGetTime() - lastFrame;
+// 		lastFrame += dt;
+// 		//input
+// 		processInput(window);
+// 		//clear screen for new frame
+// 		clearScrn();
+// 		//render object
+// 		bindShader(shaderProgram);
+// 		draw(vao, GL_TRIANGLES, 6, GL_UNSIGNED_INT,0);
+// 		//swap frames
+// 		newFrame(window);
+// 	}
+
+// 	//clear memory
+// 	cleanup(vao);
+//     deleteShader(shaderProgram);
+// 	cleanup(vao);
+// 	return 0;
+// }
