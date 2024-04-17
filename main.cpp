@@ -1,5 +1,5 @@
 #include "iostream"
-#include "glad/glad.h"
+#include "dependencies/include/glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "cmath"
 #include "Ball.h"
