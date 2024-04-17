@@ -1,102 +1,33 @@
-#include <iostream>
-#include "dependencies/include/glad/glad.h"
-#include <GLFW/glfw3.h>
-// using namespace std;
-#include <string>
-#include <sstream>
-#include <fstream>
-#include "VAO.h"
+#include "iostream"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "cmath"
+#include "Ball.h"
+#include "Paddle.h"
+using namespace std;
 
-// settings
-unsigned int scrWidth = 800;
-unsigned int scrHeight = 600;
-const char* title = "Pong";
-GLuint shaderProgram;
+int w = 800;
+int h = 600;
 
-/*
-	initialization methods
-*/
+Ball ball;
+Paddle paddle;
 
-// initialize GLFW
-void initGLFW(unsigned int versionMajor, unsigned int versionMinor) {
-	glfwInit();
-
-	// pass in window params
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// macos specific parameter
-#ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
 }
 
-// create window
-void createWindow(GLFWwindow*& window, 
-	const char* title, unsigned int width, unsigned int height, 
-	GLFWframebuffersizefun framebufferSizeCallback) {
-	window = glfwCreateWindow(width, height, title, NULL, NULL);
-	if (!window) {
-		return;
-	}
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+void process_input(GLFWwindow* window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
 }
 
-// load GLAD library
-bool loadGlad() {
-	return gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-}
-
-/*
-	shader methods
-*/
-
-// read file
-std::string readFile(const char* filename) {
-	std::ifstream file;
-	std::stringstream buf;
-
-	std::string ret = "";
-
-	// open file
-	file.open(filename);
-
-	if (file.is_open()) {
-		// read buffer
-		buf << file.rdbuf();
-		ret = buf.str();
-	}
-	else {
-		std::cout << "Could not open " << filename << std::endl;
-	}
-
-	// close file
-	file.close();
-
-	return ret;
-}
-
-// generate shader
-int genShader(const char* filepath, GLenum type) {
-	std::string shaderSrc = readFile(filepath);
-	const GLchar* shader = shaderSrc.c_str();
-
-	// build and compile shader
-	int shaderObj = glCreateShader(type);
-	glShaderSource(shaderObj, 1, &shader, NULL);
-	glCompileShader(shaderObj);
-
-	// check for errors
-	int success;
-	char infoLog[512];
-	glGetShaderiv(shaderObj, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(shaderObj, 512, NULL, infoLog);
-		std::cout << "Error in shader compilation: " << infoLog << std::endl;
-		return -1;
-	}
+int main() {
+    // Initialize GLFW
+    if (!glfwInit()) {
+        cout << "Failed to initialize GLFW" << endl;
+        return -1;
+    }
 
     // Create a GLFW window
     GLFWwindow* window = glfwCreateWindow(w, h, "Pong", NULL, NULL);
