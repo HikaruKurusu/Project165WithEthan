@@ -4,11 +4,11 @@
 class Ball {
 public:
     float ballRadius = 0.02f;
-    float bSpeed = 0.005f;
-    float ballX = 0.5f;
-    float ballY = 0.5f;
-    float ballVelX = bSpeed;
-    float ballVelY = bSpeed;
+    float bSpeed = 0.001f;
+    float ballX = 0.0f;
+    float ballY = 0.0f;
+    float ballVelX = -bSpeed;
+    float ballVelY = 0;
 
     void draw_ball() {
         int numSegments = 100;
