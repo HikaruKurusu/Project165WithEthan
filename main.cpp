@@ -68,7 +68,7 @@ int main() {
 
 
         ball.draw_ball();
-        // paddle.draw_Paddle();
+        paddle.draw_Paddle();
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
