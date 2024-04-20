@@ -49,6 +49,7 @@ public:
             ballVelY = -0.75f * bSpeed;
             ballVelX = -ballVelX;
         }
+        bSpeed += 0.0001f;
     }
 };
 
