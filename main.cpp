@@ -3,7 +3,6 @@
 #include "GLFW/glfw3.h"
 #include "cmath"
 #include "Ball.h"
-#include "Paddle.h"
 using namespace std;
 
 int w = 800;
@@ -95,7 +94,7 @@ int main() {
             ball.ballVelY = -ball.ballVelY;
         }
         if (checkCollision(ball, paddle)) {
-            ball.ballVelX = -ball.ballVelX;
+            ball.paddleBounce(paddle);
         }
         
         // Clear the screen
