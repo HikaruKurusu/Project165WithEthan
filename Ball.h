@@ -10,6 +10,7 @@ public:
     float ballY = 0.0f;
     float ballVelX = -bSpeed;
     float ballVelY = 0;
+    bool swapDirection = true;
 
     void draw_ball() {
         int numSegments = 100;
@@ -50,6 +51,23 @@ public:
             ballVelX = -ballVelX;
         }
         bSpeed += 0.0001f;
+        std::cout << bSpeed << std::endl;
+    }
+
+    void resetBall() {
+        ballX = 0.0f;
+        ballY = 0.0f;
+        if (swapDirection) {
+            bSpeed = 0.003f;
+            ballVelX = bSpeed;
+            swapDirection = !swapDirection;
+        }
+        else {
+            bSpeed = 0.003f;
+            ballVelX = -bSpeed;
+            swapDirection = !swapDirection;
+        }
+        ballVelY = 0.0f;
     }
 };
 

@@ -97,7 +97,9 @@ int main() {
 
         // Bounce off the walls and paddles
         if (ball.ballX + ball.ballRadius >= 1.0f || ball.ballX - ball.ballRadius <= -1.0f) {
-            ball.ballVelX = -ball.ballVelX;
+            ball.resetBall();
+            playerPaddle.resetPaddle();
+            compPaddle.resetPaddle();
         }
         if (ball.ballY + ball.ballRadius >= 1.0f || ball.ballY - ball.ballRadius <= -1.0f) {
             ball.ballVelY = -ball.ballVelY;

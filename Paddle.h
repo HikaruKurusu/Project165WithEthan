@@ -7,11 +7,13 @@ public:
     float paddleSpeed;
     float paddleX;
     float paddleY;//change these to make it on edge of screen
+    float initialY;
 
     Paddle(float speed, float posX, float posY) {
         paddleSpeed = speed;
         paddleX = posX;
         paddleY = posY;
+        initialY = posY;
     }
 
     void draw_Paddle_left() {
@@ -40,5 +42,9 @@ public:
             glVertex2f(paddleX - (paddleSize/10.0f), paddleY - paddleSize/2.0f);
             glVertex2f(paddleX - 0.05f, paddleY - paddleSize/2.0f);
         glEnd();
+    }
+
+    void resetPaddle() {
+        paddleY = initialY;
     }
 };
