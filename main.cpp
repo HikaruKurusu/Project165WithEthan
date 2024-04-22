@@ -62,7 +62,20 @@ bool checkCollision(Ball ball, Paddle paddle, bool left) {
 	}
 	return true;
 }
-
+// void drawText(const char* text, float x, float y, int length){
+//     glMatrixMode(GL_PROJECTION);
+//     double *matrix = new double[16];
+//     glGetDoublei_v(GL_PROJECTION_MATRIX, 0, matrix);
+//     glLoadIdentity();
+//     glOrtho(0, w, 0, h, -1, 1);
+//     glMatrixMode(GL_MODELVIEW);
+//     glLoadIdentity();
+//     glPushMatrix();
+//     glLoadIdentity();
+//     glRasterPos2i(x, y);
+//     for (int i = 0; i < length; i++){
+//     }
+// }
 int main() {
         int AICount = 0;
         int playerCount = 0;
