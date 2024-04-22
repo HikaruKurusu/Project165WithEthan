@@ -43,6 +43,9 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "vector": "cpp"
     }
 }

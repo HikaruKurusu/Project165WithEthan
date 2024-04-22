@@ -12,6 +12,7 @@ Ball ball;
 Paddle playerPaddle = Paddle(0.0039f, -0.95f, 0.15f);
 Paddle compPaddle = Paddle(ball.bSpeed/3 * 2, -playerPaddle.paddleX, playerPaddle.paddleY);
 
+//window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
@@ -63,6 +64,8 @@ bool checkCollision(Ball ball, Paddle paddle, bool left) {
 }
 
 int main() {
+        int AICount = 0;
+        int playerCount = 0;
     // Initialize GLFW
     if (!glfwInit()) {
         cout << "Failed to initialize GLFW" << endl;
@@ -96,10 +99,29 @@ int main() {
 
 
         // Bounce off the walls and paddles
-        if (ball.ballX + ball.ballRadius >= 1.0f || ball.ballX - ball.ballRadius <= -1.0f) {
+        if (ball.ballX + ball.ballRadius >= 1.0f) {
             ball.resetBall();
             playerPaddle.resetPaddle();
             compPaddle.resetPaddle();
+            playerCount++;
+            std::cout<<"PLAYER WINS" << " " << playerCount <<std::endl;
+            if(playerCount == 5) {
+                cout<<"Player WINS!!!!" <<endl;
+                glfwTerminate();
+                return -1;
+            }
+            
+        } else if(ball.ballX - ball.ballRadius <= -1.0f) {
+            ball.resetBall();
+            playerPaddle.resetPaddle();
+            compPaddle.resetPaddle();
+            AICount++;
+            std::cout<<"AI Score" << " " << AICount <<std::endl;
+            if(AICount == 5) {
+                cout<<"AI WINS!!!!" <<endl;
+                glfwTerminate();
+                return -1;
+            }
         }
         if (ball.ballY + ball.ballRadius >= 1.0f || ball.ballY - ball.ballRadius <= -1.0f) {
             ball.ballVelY = -ball.ballVelY;
