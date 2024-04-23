@@ -11,7 +11,7 @@ int h = 600;
 
 Ball ball;
 Paddle playerPaddle = Paddle(0.0039f, -0.95f, 0.15f);
-Paddle compPaddle = Paddle(ball.bSpeed/3 * 2, -playerPaddle.paddleX, playerPaddle.paddleY);
+Paddle compPaddle = Paddle(ball.getBSpeed()/3 * 2, -playerPaddle.paddleX, playerPaddle.paddleY);
 
 //window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -31,10 +31,10 @@ void process_input(GLFWwindow* window) {
 }
 
 bool checkCollision(Ball ball, Paddle paddle, bool left) {
-    float ballLeft = ball.ballX - ball.ballRadius;
-    float ballRight = ball.ballX + ball.ballRadius;
-    float ballTop = ball.ballY + ball.ballRadius;
-    float ballBottom = ball.ballY - ball.ballRadius;
+    float ballLeft = ball.getX() - ball.getRadius();
+    float ballRight = ball.getX() + ball.getRadius();
+    float ballTop = ball.getY() + ball.getRadius();
+    float ballBottom = ball.getY() - ball.getRadius();
 
     float paddleLeft;
     float paddleRight;
@@ -110,12 +110,11 @@ int main() {
         process_input(window);
 
         // Update ball position
-        ball.ballX += ball.ballVelX;
-        ball.ballY += ball.ballVelY;
+        ball.updateVel();
 
 
         // Bounce off the walls and paddles
-        if (ball.ballX + ball.ballRadius >= 1.0f) {
+        if (ball.getX(); + ball.getRadius() >= 1.0f) {
             ball.resetBall();
             playerPaddle.resetPaddle();
             compPaddle.resetPaddle();
@@ -127,7 +126,7 @@ int main() {
                 return -1;
             }
             
-        } else if(ball.ballX - ball.ballRadius <= -1.0f) {
+        } else if(ball.getX() - ball.getRadius() <= -1.0f) {
             ball.resetBall();
             playerPaddle.resetPaddle();
             compPaddle.resetPaddle();
@@ -139,8 +138,8 @@ int main() {
                 return -1;
             }
         }
-        if (ball.ballY + ball.ballRadius >= 1.0f || ball.ballY - ball.ballRadius <= -1.0f) {
-            ball.ballVelY = -ball.ballVelY;
+        if (ball.getY() + ball.getRadius() >= 1.0f || ball.getY() - ball.getRadius() <= -1.0f) {
+            ball.setVelY(-ball.getVelY());
         }
         if (checkCollision(ball, playerPaddle, true)) {
             ball.paddleBounce(playerPaddle);
@@ -150,11 +149,11 @@ int main() {
         }
 
         // computer paddle logic
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f > ball.ballY && compPaddle.paddleY - compPaddle.paddleSize/2.0f > -1.0f) {
+        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f > ball.getY() && compPaddle.paddleY - compPaddle.paddleSize/2.0f > -1.0f) {
             compPaddle.paddleY -= compPaddle.paddleSpeed;
             
         }
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f < ball.ballY && compPaddle.paddleY < 1.0f) {
+        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f < ball.getY() && compPaddle.paddleY < 1.0f) {
             compPaddle.paddleY += compPaddle.paddleSpeed;
         }
 

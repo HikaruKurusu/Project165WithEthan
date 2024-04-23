@@ -3,14 +3,42 @@
 #include <cmath>
 #include "Paddle.h"
 class Ball {
-public:
     float ballRadius = 0.02f;
-    float bSpeed = 0.008f;
+    float bSpeed = 0.003f;
     float ballX = 0.0f;
     float ballY = 0.0f;
     float ballVelX = -bSpeed;
     float ballVelY = 0;
     bool swapDirection = true;
+public:
+    float getBSpeed() {
+        return bSpeed;
+    }
+
+    float getX() {
+        return ballX;
+    }
+
+    float getY() {
+        return ballY;
+    }
+
+    float getRadius() {
+        return ballRadius;
+    }
+
+    float getVelY() {
+        return ballVelY;
+    }
+
+    void setVelY(float v) {
+        ballVelY = v;
+    }
+
+    void updateVel() {
+        ballX += ballVelX;
+        ballY += ballVelY;
+    }
 
 
     void draw_ball() {
@@ -57,13 +85,13 @@ public:
         ballX = 0.0f;
         ballY = 0.0f;
         if (swapDirection) {
-            bSpeed = 0.008f;
+            bSpeed = 0.003f;
             ballVelX = bSpeed;
             swapDirection = !swapDirection;
             
         }
         else {
-            bSpeed = 0.008f;
+            bSpeed = 0.003f;
             ballVelX = -bSpeed;
             swapDirection = !swapDirection;
 
