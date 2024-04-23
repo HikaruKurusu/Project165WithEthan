@@ -34,7 +34,6 @@ public:
         float ballBottom = ballY - ballRadius;
 
         float paddleTop = paddle.paddleY;
-        float paddleBottom = paddle.paddleY - paddle.paddleSize/2.0f;
         float paddleHeight = paddle.paddleSize/2.0f;
 
         float paddleRangeUpper = paddleTop - paddleHeight / 3.0f;
