@@ -3,6 +3,7 @@
 #include "GLFW/glfw3.h"
 #include "cmath"
 #include "Ball.h"
+#include <string> 
 using namespace std;
 
 int w = 800;
@@ -62,20 +63,22 @@ bool checkCollision(Ball ball, Paddle paddle, bool left) {
 	}
 	return true;
 }
-// void drawText(const char* text, float x, float y, int length){
-//     glMatrixMode(GL_PROJECTION);
-//     double *matrix = new double[16];
-//     glGetDoublei_v(GL_PROJECTION_MATRIX, 0, matrix);
-//     glLoadIdentity();
-//     glOrtho(0, w, 0, h, -1, 1);
-//     glMatrixMode(GL_MODELVIEW);
-//     glLoadIdentity();
-//     glPushMatrix();
-//     glLoadIdentity();
-//     glRasterPos2i(x, y);
-//     for (int i = 0; i < length; i++){
-//     }
-// }
+void drawLineDownMiddle() {
+    glColor3f(1.0, 1.0, 1.0);
+    glLineWidth(5); // Adjust the line width if needed
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    glBegin(GL_QUADS);
+        // Vertical part of 1 (scaled down by 0.25)
+        glVertex2f(0.0f, 1.2f);   // Top-left
+        glVertex2f(0.003f, 1.2f); // Top-right
+        glVertex2f(0.003f, -1.2f); // Bottom-right
+        glVertex2f(0.0f, -1.2f);  // Bottom-left
+    glEnd();
+}
+
+
 int main() {
         int AICount = 0;
         int playerCount = 0;
@@ -157,11 +160,10 @@ int main() {
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
-
-
         ball.draw_ball();
         playerPaddle.draw_Paddle_left();
         compPaddle.draw_Paddle_right();
+        drawLineDownMiddle();
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -170,3 +172,4 @@ int main() {
     glfwTerminate();
     return 0;
 }
+
