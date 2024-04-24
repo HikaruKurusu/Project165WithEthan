@@ -18,11 +18,9 @@ public:
     ~MiddlePaddle() {}
     void middleMovement(){
         if(paddleY - paddleSize/2.0f > -1.0f && movingDown) {
-            std::cout << "moving up" << std::endl;
             paddleY -= 0.002f;
         } else if(paddleY < 1.0f) {
-            std::cout << "moving down" << std::endl;
-            if (!movingDown) {
+            if (movingDown) {
                 movingDown = !movingDown;
             }
             paddleY += 0.002f;

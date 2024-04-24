@@ -18,6 +18,8 @@ CompPaddle compPaddle = CompPaddle(ball.getBSpeed()/3 * 2, -playerPaddle.getX(),
 CompPaddle* middlePaddle = new MiddlePaddle(compPaddle.getSpeed(), 0, 0);
 
 
+
+
 //window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
@@ -119,8 +121,8 @@ void drawLineDownMiddle() {
 
 
 int main() {
-        int AICount = 0;
-        int playerCount = 0;
+    int AICount = 0;
+    int playerCount = 0;
     // Initialize GLFW
     if (!glfwInit()) {
         cout << "Failed to initialize GLFW" << endl;
@@ -153,6 +155,7 @@ int main() {
 
         // Update middle paddle position
         dynamic_cast<MiddlePaddle*>(middlePaddle)->middleMovement();
+        
 
 
         // Bounce off the walls and paddles
@@ -203,8 +206,6 @@ int main() {
         if (checkCollision(ball, *middlePaddle, false)) {
             ball.paddleBounceComp(*middlePaddle);
         } // test
-
-
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw_ball();
