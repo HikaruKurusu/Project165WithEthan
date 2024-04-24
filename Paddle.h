@@ -1,6 +1,8 @@
 #include "dependencies/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <cmath>
+#ifndef PADDLE_H
+#define PADDLE_H
 class Paddle{
 public:
     ~Paddle();
@@ -17,3 +19,4 @@ public:
 
     virtual void resetPaddle() = 0;
 };
+#endif

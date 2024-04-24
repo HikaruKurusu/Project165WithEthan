@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include "Paddle.h"
+#ifndef PLAYERPADDLE_H
+#define PLAYERPADDLE_H
 class PlayerPaddle: protected Paddle{
     float paddleSize = 0.8f;
     float paddleSpeed;
@@ -70,3 +72,4 @@ public:
         paddleY = initialY;
     }
 };
+#endif

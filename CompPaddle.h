@@ -2,7 +2,8 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include "Paddle.h"
-#include "Ball.h"
+#ifndef COMPPADDLE_H
+#define COMPPADDLE_H
 class CompPaddle: protected Paddle{
     float paddleSize = 0.8f;
     float paddleSpeed;
@@ -66,3 +67,4 @@ public:
         }
     }
 };
+#endif
