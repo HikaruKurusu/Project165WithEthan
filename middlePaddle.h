@@ -4,7 +4,7 @@
 #include "CompPaddle.h"
 #ifndef MIDDLEPADDLE_H
 #define MIDDLEPADDLE_H
-class MiddlePaddle: protected CompPaddle{
+class MiddlePaddle: public CompPaddle{
     float paddleSize = 0.8f;
     float paddleSpeed;
     float paddleX;
