@@ -21,6 +21,7 @@ public:
         ballVelY = velY;
         swapDirection = true;
     }
+    ~Ball() {}
 
     float getBSpeed() {
         return bSpeed;

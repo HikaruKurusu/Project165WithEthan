@@ -15,7 +15,7 @@ public:
         paddleY = posY;
         initialY = posY;
     }
-
+    ~Paddle() {}
     void draw_Paddle_left() {
         glColor3f(1.0,1.0,1.0);
         glLineWidth(10);
