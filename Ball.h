@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include "PlayerPaddle.h"
-#include "compPaddle.h"
+#include "CompPaddle.h"
 class Ball {
     float ballRadius;
     float bSpeed;

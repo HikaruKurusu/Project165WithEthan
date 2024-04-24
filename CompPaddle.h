@@ -56,15 +56,5 @@ public:
     void resetPaddle() {
         paddleY = initialY;
     }
-
-    void paddleLogic(Ball ball) {
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f > ball.getY() && compPaddle.paddleY - compPaddle.paddleSize/2.0f > -1.0f) {
-            compPaddle.paddleY -= compPaddle.paddleSpeed;
-            
-        }
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f < ball.getY() && compPaddle.paddleY < 1.0f) {
-            compPaddle.paddleY += compPaddle.paddleSpeed;
-        }
-    }
 };
 #endif

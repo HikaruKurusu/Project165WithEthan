@@ -4,7 +4,7 @@
 #include "cmath"
 #include "Ball.h"
 #include "PlayerPaddle.h"
-#include "compPaddle.h"
+#include "CompPaddle.h"
 #include <string> 
 using namespace std;
 
@@ -185,7 +185,13 @@ int main() {
         }
 
         // computer paddle logic
-        compPaddle.paddleLogic(ball);
+        if (compPaddle.getY() - compPaddle.getSize()/4.0f > ball.getY() && compPaddle.getY() - compPaddle.getSize()/2.0f > -1.0f) {
+            compPaddle.setY(compPaddle.getY() - compPaddle.getSpeed());
+            
+        }
+        if (compPaddle.getY() - compPaddle.getSize()/4.0f < ball.getY() && compPaddle.getY() < 1.0f) {
+            compPaddle.setY(compPaddle.getY() + compPaddle.getSpeed());
+        }
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
