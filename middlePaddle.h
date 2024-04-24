@@ -17,13 +17,13 @@ public:
     }
     ~MiddlePaddle() {}
     void middleMovement(){
-        if(paddleY - paddleSize/2.0f > -1.0f && movingDown) {
-            paddleY -= 0.002f;
-        } else if(paddleY < 1.0f) {
+        if(getY() - getSize()/2.0f > -1.0f && movingDown) {
+            setY(getY() - 0.002f);
+        } else if(getY() < 1.0f) {
             if (movingDown) {
                 movingDown = !movingDown;
             }
-            paddleY += 0.002f;
+            setY(getY() + 0.002f);
         }
         else {
             movingDown = !movingDown;
