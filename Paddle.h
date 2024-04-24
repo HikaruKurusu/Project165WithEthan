@@ -11,11 +11,11 @@ protected:
 public:
     ~Paddle();
 
-    virtual float getY() = 0;
+    virtual float getY() const = 0;
 
     virtual float getX() = 0;
 
-    virtual float getSize() = 0;
+    virtual float getSize() const = 0;
 
     virtual void draw_Paddle() = 0;
 

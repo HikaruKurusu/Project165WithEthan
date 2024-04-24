@@ -70,7 +70,7 @@ public:
         glEnd();
     }
 
-    void paddleBounce(Paddle paddle) {
+    void paddleBounce(const Paddle& paddle) {
         float ballBottom = ballY - ballRadius;
 
         float paddleTop = paddle.getY();
