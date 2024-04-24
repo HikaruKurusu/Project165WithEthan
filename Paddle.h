@@ -5,7 +5,6 @@
 #define PADDLE_H
 class Paddle{
 public:
-    ~Paddle();
 
     virtual float getY() const = 0;
 
