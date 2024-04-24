@@ -5,7 +5,7 @@
 #include "Ball.h"
 #include "PlayerPaddle.h"
 #include "CompPaddle.h"
-#include <string> 
+#include <string>
 using namespace std;
 
 int w = 800;
