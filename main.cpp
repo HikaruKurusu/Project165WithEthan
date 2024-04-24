@@ -9,7 +9,7 @@ using namespace std;
 int w = 800;
 int h = 600;
 
-Ball ball;
+Ball ball = Ball(0.02f, 0.003f, 0.0f, 0.0f, 0);
 Paddle playerPaddle = Paddle(0.0039f, -0.95f, 0.15f);
 Paddle compPaddle = Paddle(ball.getBSpeed()/3 * 2, -playerPaddle.paddleX, playerPaddle.paddleY);
 
@@ -114,7 +114,7 @@ int main() {
 
 
         // Bounce off the walls and paddles
-        if (ball.getX(); + ball.getRadius() >= 1.0f) {
+        if (ball.getX() + ball.getRadius() >= 1.0f) {
             ball.resetBall();
             playerPaddle.resetPaddle();
             compPaddle.resetPaddle();

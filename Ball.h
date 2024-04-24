@@ -3,14 +3,25 @@
 #include <cmath>
 #include "Paddle.h"
 class Ball {
-    float ballRadius = 0.02f;
-    float bSpeed = 0.003f;
-    float ballX = 0.0f;
-    float ballY = 0.0f;
-    float ballVelX = -bSpeed;
-    float ballVelY = 0;
-    bool swapDirection = true;
+    float ballRadius;
+    float bSpeed;
+    float ballX;
+    float ballY;
+    float ballVelX;
+    float ballVelY;
+    bool swapDirection;
 public:
+
+    Ball(float radius, float speed, float x, float y, float velY) {
+        ballRadius = radius;
+        bSpeed = speed;
+        ballX = x;
+        ballY = y;
+        ballVelX = -speed;
+        ballVelY = velY;
+        swapDirection = true;
+    }
+
     float getBSpeed() {
         return bSpeed;
     }
