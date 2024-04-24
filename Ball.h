@@ -44,6 +44,10 @@ public:
         return ballVelY;
     }
 
+    float getVelX() {
+        return ballVelX;
+    }
+
     void setVelY(float v) {
         ballVelY = v;
     }
@@ -92,6 +96,10 @@ public:
             ballVelX = -ballVelX;
         }
         bSpeed += 0.0001f;
+        if(ballVelX < 0)
+            ballVelX -= 0.0001f;
+        else
+            ballVelX += 0.0001f;
     }
 
     void paddleBounceComp(const CompPaddle& paddle) {
@@ -115,6 +123,10 @@ public:
             ballVelX = -ballVelX;
         }
         bSpeed += 0.0001f;
+        if(ballVelX < 0)
+            ballVelX -= 0.0001f;
+        else
+            ballVelX += 0.0001f;
     }
 
     void resetBall() {
@@ -130,8 +142,6 @@ public:
             bSpeed = 0.003f;
             ballVelX = -bSpeed;
             swapDirection = !swapDirection;
-
-            
         }
         ballVelY = 0.0f;
     }
