@@ -178,11 +178,9 @@ int main() {
             ball.setVelY(-ball.getVelY());
         }
         if (checkCollision(ball, playerPaddle, true)) {
-            cout << ball.getVelX() << endl;
             ball.paddleBouncePlayer(playerPaddle);
         }
         if (checkCollision(ball, compPaddle, false)) {
-            cout << ball.getVelX() << endl;
             ball.paddleBounceComp(compPaddle);
         }
 
