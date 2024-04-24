@@ -188,7 +188,7 @@ int main() {
         }
         if (checkCollision(ball, compPaddle, false)) {
             ball.paddleBounceComp(compPaddle);
-        }
+        } // test
 
         // computer paddle logic
         if (compPaddle.getY() - compPaddle.getSize()/4.0f > ball.getY() && compPaddle.getY() - compPaddle.getSize()/2.0f > -1.0f) {
