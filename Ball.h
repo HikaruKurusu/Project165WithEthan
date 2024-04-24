@@ -5,6 +5,7 @@
 #include "CompPaddle.h"
 class Ball {
     float ballRadius;
+    float bSpeedInitial;
     float bSpeed;
     float ballX;
     float ballY;
@@ -16,6 +17,7 @@ public:
     Ball(float radius, float speed, float x, float y, float velY) {
         ballRadius = radius;
         bSpeed = speed;
+        bSpeedInitial = speed;
         ballX = x;
         ballY = y;
         ballVelX = -speed;
@@ -133,13 +135,13 @@ public:
         ballX = 0.0f;
         ballY = 0.0f;
         if (swapDirection) {
-            bSpeed = 0.003f;
+            bSpeed = bSpeedInitial;
             ballVelX = bSpeed;
             swapDirection = !swapDirection;
             
         }
         else {
-            bSpeed = 0.003f;
+            bSpeed = bSpeedInitial;
             ballVelX = -bSpeed;
             swapDirection = !swapDirection;
         }
