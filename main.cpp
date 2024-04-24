@@ -199,6 +199,12 @@ int main() {
             compPaddle.setY(compPaddle.getY() + compPaddle.getSpeed());
         }
 
+        //move middle paddle
+        if (checkCollision(ball, *middlePaddle, false)) {
+            ball.paddleBounceComp(*middlePaddle);
+        } // test
+
+
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw_ball();
