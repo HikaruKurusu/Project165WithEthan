@@ -4,12 +4,6 @@
 #include "Paddle.h"
 class compPaddle: public Paddle{
 public:
-    float paddleSize = 0.8f;
-    float paddleSpeed;
-    float paddleX;
-    float paddleY;//change these to make it on edge of screen
-    float initialY;
-
     compPaddle(float speed, float posX, float posY) {
         paddleSpeed = speed;
         paddleX = posX;

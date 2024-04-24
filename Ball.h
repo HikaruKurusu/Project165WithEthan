@@ -73,8 +73,8 @@ public:
     void paddleBounce(Paddle paddle) {
         float ballBottom = ballY - ballRadius;
 
-        float paddleTop = paddle.paddleY;
-        float paddleHeight = paddle.paddleSize/2.0f;
+        float paddleTop = paddle.getY();
+        float paddleHeight = paddle.getSize()/2.0f;
 
         float paddleRangeUpper = paddleTop - paddleHeight / 3.0f;
 	    float paddleRangeMiddle = paddleTop - (paddleHeight * 2.0f) / 3.0f;

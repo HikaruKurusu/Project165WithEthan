@@ -4,11 +4,6 @@
 #include "Paddle.h"
 class PlayerPaddle: public Paddle{
 public:
-    float paddleSize = 0.8f;
-    float paddleSpeed;
-    float paddleX;
-    float paddleY;//change these to make it on edge of screen
-    float initialY;
 
     PlayerPaddle(float speed, float posX, float posY) {
         paddleSpeed = speed;
@@ -17,6 +12,18 @@ public:
         initialY = posY;
     }
     ~PlayerPaddle() {}
+
+    float getY() {
+        return paddleY;
+    }
+
+    float getX() {
+        return paddleX;
+    }
+
+    float getSize() {
+        return paddleSize;
+    }
 
     void draw_Paddle() {
         glColor3f(1.0,1.0,1.0);
