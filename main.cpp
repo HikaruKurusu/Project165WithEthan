@@ -218,6 +218,7 @@ int main() {
         glfwPollEvents();
     }
 
+    delete middlePaddle;
     glfwTerminate();
     return 0;
 }
