@@ -1,7 +1,7 @@
 #include "dependencies/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <cmath>
-#include "Paddle.h"
+#include "PlayerPaddle.h"
 class Ball {
     float ballRadius;
     float bSpeed;
@@ -70,7 +70,30 @@ public:
         glEnd();
     }
 
-    void paddleBounce(const Paddle& paddle) {
+    void paddleBouncePlayer(const PlayerPaddle& paddle) {
+        float ballBottom = ballY - ballRadius;
+
+        float paddleTop = paddle.getY();
+        float paddleHeight = paddle.getSize()/2.0f;
+
+        float paddleRangeUpper = paddleTop - paddleHeight / 3.0f;
+	    float paddleRangeMiddle = paddleTop - (paddleHeight * 2.0f) / 3.0f;
+
+        if (ballBottom > paddleRangeUpper){
+            ballVelY = 0.75f * bSpeed;
+            ballVelX = -ballVelX;
+        }
+        else if (ballBottom > paddleRangeMiddle) {
+            ballVelX = -ballVelX;
+        }
+        else {
+            ballVelY = -0.75f * bSpeed;
+            ballVelX = -ballVelX;
+        }
+        bSpeed += 0.0001f;
+    }
+
+    void paddleBounceComp(const CompPaddle& paddle) {
         float ballBottom = ballY - ballRadius;
 
         float paddleTop = paddle.getY();

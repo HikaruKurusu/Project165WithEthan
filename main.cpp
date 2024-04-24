@@ -3,6 +3,8 @@
 #include "GLFW/glfw3.h"
 #include "cmath"
 #include "Ball.h"
+#include "PlayerPaddle.h"
+#include "compPaddle.h"
 #include <string> 
 using namespace std;
 
@@ -10,8 +12,8 @@ int w = 800;
 int h = 600;
 
 Ball ball = Ball(0.02f, 0.003f, 0.0f, 0.0f, 0);
-Paddle playerPaddle = Paddle(0.0039f, -0.95f, 0.15f);
-Paddle compPaddle = Paddle(ball.getBSpeed()/3 * 2, -playerPaddle.paddleX, playerPaddle.paddleY);
+PlayerPaddle playerPaddle = PlayerPaddle(0.0039f, -0.95f, 0.15f);
+CompPaddle compPaddle = CompPaddle(ball.getBSpeed()/3 * 2, -playerPaddle.getX(), playerPaddle.getY());
 
 //window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -22,15 +24,15 @@ void process_input(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
-    else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS && playerPaddle.paddleY < 1.0f) {
-        playerPaddle.paddleY += playerPaddle.paddleSpeed;
+    else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS && playerPaddle.getY() < 1.0f) {
+        playerPaddle.setY(playerPaddle.getY() + playerPaddle.getSpeed());
     }
-    else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS && playerPaddle.paddleY - playerPaddle.paddleSize/2.0f > -1.0f) {
-        playerPaddle.paddleY -= playerPaddle.paddleSpeed;
+    else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS && playerPaddle.getY() - playerPaddle.getSize()/2.0f > -1.0f) {
+        playerPaddle.setY(playerPaddle.getY() - playerPaddle.getSpeed());
     }
 }
 
-bool checkCollision(Ball ball, Paddle paddle, bool left) {
+bool checkCollision(Ball ball, PlayerPaddle paddle, bool left) {
     float ballLeft = ball.getX() - ball.getRadius();
     float ballRight = ball.getX() + ball.getRadius();
     float ballTop = ball.getY() + ball.getRadius();
@@ -38,16 +40,50 @@ bool checkCollision(Ball ball, Paddle paddle, bool left) {
 
     float paddleLeft;
     float paddleRight;
-    float paddleTop = paddle.paddleY;
-    float paddleBottom = paddle.paddleY - paddle.paddleSize/2.0f;
+    float paddleTop = paddle.getY();
+    float paddleBottom = paddle.getY() - paddle.getSize()/2.0f;
 
     if(left){
-        paddleLeft = paddle.paddleX + 0.05f;
-        paddleRight = paddle.paddleX + (paddle.paddleSize/10.0f);    
+        paddleLeft = paddle.getX() + 0.05f;
+        paddleRight = paddle.getX() + (paddle.getSize()/10.0f);    
     }
     else {
-        paddleLeft = paddle.paddleX - 0.05f;
-        paddleRight = paddle.paddleX - (paddle.paddleSize/10.0f);
+        paddleLeft = paddle.getX() - 0.05f;
+        paddleRight = paddle.getX() - (paddle.getSize()/10.0f);
+    }
+    if (ballLeft >= paddleRight) {
+		return false;
+	}
+	if (ballRight <= paddleLeft) {
+		return false;
+	}
+	if (ballTop <= paddleBottom) {
+		return false;
+	}
+	if (ballBottom >= paddleTop) {
+		return false;
+	}
+	return true;
+}
+
+bool checkCollision(Ball ball, CompPaddle paddle, bool left) {
+    float ballLeft = ball.getX() - ball.getRadius();
+    float ballRight = ball.getX() + ball.getRadius();
+    float ballTop = ball.getY() + ball.getRadius();
+    float ballBottom = ball.getY() - ball.getRadius();
+
+    float paddleLeft;
+    float paddleRight;
+    float paddleTop = paddle.getY();
+    float paddleBottom = paddle.getY() - paddle.getSize()/2.0f;
+
+    if(left){
+        paddleLeft = paddle.getX() + 0.05f;
+        paddleRight = paddle.getX() + (paddle.getSize()/10.0f);    
+    }
+    else {
+        paddleLeft = paddle.getX() - 0.05f;
+        paddleRight = paddle.getX() - (paddle.getSize()/10.0f);
     }
     if (ballLeft >= paddleRight) {
 		return false;
@@ -142,26 +178,20 @@ int main() {
             ball.setVelY(-ball.getVelY());
         }
         if (checkCollision(ball, playerPaddle, true)) {
-            ball.paddleBounce(playerPaddle);
+            ball.paddleBouncePlayer(playerPaddle);
         }
         if (checkCollision(ball, compPaddle, false)) {
-            ball.paddleBounce(compPaddle);
+            ball.paddleBounceComp(compPaddle);
         }
 
         // computer paddle logic
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f > ball.getY() && compPaddle.paddleY - compPaddle.paddleSize/2.0f > -1.0f) {
-            compPaddle.paddleY -= compPaddle.paddleSpeed;
-            
-        }
-        if (compPaddle.paddleY - compPaddle.paddleSize/4.0f < ball.getY() && compPaddle.paddleY < 1.0f) {
-            compPaddle.paddleY += compPaddle.paddleSpeed;
-        }
+        compPaddle.paddleLogic(ball);
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw_ball();
-        playerPaddle.draw_Paddle_left();
-        compPaddle.draw_Paddle_right();
+        playerPaddle.draw_Paddle();
+        compPaddle.draw_Paddle();
         drawLineDownMiddle();
         // Swap buffers and poll events
         glfwSwapBuffers(window);
