@@ -151,6 +151,9 @@ int main() {
         // Update ball position
         ball.updateVel();
 
+        // Update middle paddle position
+        dynamic_cast<MiddlePaddle*>(middlePaddle)->middleMovement();
+
 
         // Bounce off the walls and paddles
         if (ball.getX() + ball.getRadius() >= 1.0f) {
@@ -201,6 +204,7 @@ int main() {
         ball.draw_ball();
         playerPaddle.draw_Paddle();
         compPaddle.draw_Paddle();
+        middlePaddle->draw_Paddle();
         drawLineDownMiddle();
         // Swap buffers and poll events
         glfwSwapBuffers(window);
