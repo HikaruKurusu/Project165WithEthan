@@ -4,7 +4,7 @@
 #include "CompPaddle.h"
 #ifndef MIDDLEPADDLE_H
 #define MIDDLEPADDLE_H
-class middlePaddle: protected CompPaddle{
+class MiddlePaddle: protected CompPaddle{
     float paddleSize = 0.8f;
     float paddleSpeed;
     float paddleX;
@@ -12,10 +12,10 @@ class middlePaddle: protected CompPaddle{
     float initialY;
     bool movingDown = true;
 public:
-    middlePaddle(float speed, float posX, float posY) : CompPaddle(speed, posX, posY) {
+    MiddlePaddle(float speed, float posX, float posY) : CompPaddle(speed, posX, posY) {
     // Other initialization code for middlePaddle if needed
     }
-    ~middlePaddle() {}
+    ~MiddlePaddle() {}
     void middleMovement(){
         if(paddleY - paddleSize/2.0f > -1.0f && movingDown) {
             paddleY -= 10;

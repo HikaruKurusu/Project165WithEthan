@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "PlayerPaddle.h"
 #include "CompPaddle.h"
+#include "MiddlePaddle.h"
 #include <string>
 using namespace std;
 
@@ -14,6 +15,8 @@ int h = 600;
 Ball ball = Ball(0.02f, 0.003f, 0.0f, 0.0f, 0);
 PlayerPaddle playerPaddle = PlayerPaddle(0.0039f, -0.95f, 0.15f);
 CompPaddle compPaddle = CompPaddle(ball.getBSpeed()/3 * 2, -playerPaddle.getX(), playerPaddle.getY());
+MiddlePaddle* middlePaddlePtr = new MiddlePaddle(compPaddle.getSpeed(), 0, 0);
+middlePaddlePtr = new CompPaddle();
 
 //window resize
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
