@@ -9,11 +9,13 @@ class MiddlePaddle: public CompPaddle{
     float paddleSpeed;
     float paddleX;
     float paddleY; 
-    float initialY;
     bool movingDown = true;
 public:
     MiddlePaddle(float speed, float posX, float posY) : CompPaddle(speed, posX, posY) {
     // Other initialization code for middlePaddle if needed
+        paddleSpeed = speed;
+        paddleX = posX;
+        paddleY = posY;
     }
     ~MiddlePaddle() {}
     void middleMovement(){

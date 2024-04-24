@@ -15,7 +15,7 @@ int h = 600;
 Ball ball = Ball(0.02f, 0.003f, 0.0f, 0.0f, 0);
 PlayerPaddle playerPaddle = PlayerPaddle(0.0039f, -0.95f, 0.15f);
 CompPaddle compPaddle = CompPaddle(ball.getBSpeed()/3 * 2, -playerPaddle.getX(), playerPaddle.getY());
-CompPaddle* middlePaddle = new MiddlePaddle(compPaddle.getSpeed(), 0, 0);
+CompPaddle* middlePaddle = new MiddlePaddle(compPaddle.getSpeed(), .065, 0);
 
 
 
